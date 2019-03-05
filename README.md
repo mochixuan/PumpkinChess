@@ -1,7 +1,5 @@
 # 南瓜棋
 
-### H5页面适配完毕: pumpkinchess-h5
-
 > 使用Taro开发一款游戏，支持（微信/百度/支付宝/字节跳动小程序、H5、React-Native） 等，现在在一端端调试。看文件名对应端的代码。
 
 ### 运行
@@ -16,6 +14,11 @@ npm run dev:h5
 https://nervjs.github.io/taro/docs/GETTING-STARTED.html
 
 ```
+
+### 适配
+
+✅ H5: pumpkinchess-h5
+
 
 ### 运行结果
 ![](https://user-gold-cdn.xitu.io/2019/3/5/1694cf12270c60e2?w=562&h=1202&f=png&s=51483) 
