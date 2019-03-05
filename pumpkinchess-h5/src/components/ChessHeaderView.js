@@ -76,6 +76,7 @@ export default class CheckerboardView extends Component{
 
   render() {
 
+    // 头部样式
     const avatarLeft = {...styles.avatar}
     avatarLeft.marginLeft = -avatarIconWidth
     avatarLeft.backgroundColor = color_00
@@ -88,23 +89,7 @@ export default class CheckerboardView extends Component{
     const avatarIconRight = {...styles.avatar_icon}
     avatarIconRight.transform = 'rotate(45deg)'
 
-    return (
-      <View style={styles.container}>
-        <View style={styles.content}>
-          <View style={avatarLeft}>
-            <Image style={avatarIconLeft} src={require('../data/img/chess1.png')} />
-          </View>
-          {this.renderNoticeView()}
-          <View style={avatarRight}>
-            <Image style={avatarIconRight} src={require('../data/img/chess2.png')} />
-          </View>
-        </View>
-        <View style={styles.bottom_line} />
-      </View>
-    )
-  }
-
-  renderNoticeView = () => {
+    // 棋
     const {themeColor,curLanguageIndex} = this.props.settingStore
     const {chessItems,chessState} = this.props.chessStore //太智能了也不好chessState提醒Mobx需要刷新
 
@@ -128,9 +113,22 @@ export default class CheckerboardView extends Component{
       })
 
     return (
-      <View style={styles.middle}>
-        <Text style={middleTitleStyle}>{getString(this.state.textTip,curLanguageIndex)}</Text>
-        {chessItemsView}
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <View style={avatarLeft}>
+            <Image style={avatarIconLeft} src={require('../data/img/chess1.png')} />
+          </View>
+
+          <View style={styles.middle}>
+            <Text style={middleTitleStyle}>{getString(this.state.textTip,curLanguageIndex)}</Text>
+            {chessItemsView}
+          </View>
+
+          <View style={avatarRight}>
+            <Image style={avatarIconRight} src={require('../data/img/chess2.png')} />
+          </View>
+        </View>
+        <View style={styles.bottom_line} />
       </View>
     )
   }

@@ -9,6 +9,7 @@ import {AtModal} from 'taro-ui'
 import SelectChessModalView from './modal/SelectChessModalView'
 import SettingModalView from "./modal/SettingModalView";
 
+
 @inject('settingStore','chessStore')
 @observer
 export default class ChessBottomView extends Component{
@@ -31,9 +32,40 @@ export default class ChessBottomView extends Component{
       isHasStart = false
     }
 
+    //warm_reminder
+    let isOpened = false
+    let content = ''
+    this.onConfirm
+    switch (this.state.commonModalState) {
+      case 0:
+        isOpened = true
+        content = getString('restart_tip',curLanguageIndex)
+        this.onConfirm = this.onResetChess
+        break
+      case 1:
+        isOpened = true
+        content = getString('repent_tip',curLanguageIndex)
+        this.onConfirm = this.onRepentChess
+        break
+      case 2:
+        isOpened = true
+        content = getString('compound_tip',curLanguageIndex)
+        this.onConfirm = this.onCompoundChess
+        break
+    }
+
     return (
       <View style={styles.container}>
-        {this.renderReStartModalView()}
+        <AtModal
+          isOpened={isOpened}
+          title={getString('warm_reminder',curLanguageIndex)}
+          cancelText={getString('cancel',curLanguageIndex)}
+          confirmText={getString('sure',curLanguageIndex)}
+          onConfirm={this.onConfirm}
+          onClose={this.onCloseCommonModal}
+          onCancel={this.onCloseCommonModal}
+          content={content}
+        />
         <SelectChessModalView />
         <SettingModalView />
         <View style={styles.top_line} />
@@ -56,45 +88,6 @@ export default class ChessBottomView extends Component{
           </View>
         </View>
       </View>
-    )
-  }
-
-  renderReStartModalView = () => {
-    const {curLanguageIndex} = this.props.settingStore
-
-    let isOpened = false
-    let content = ''
-    let onConfirm = () => {}
-
-    switch (this.state.commonModalState) {
-      case 0:
-        isOpened = true
-        content = getString('restart_tip',curLanguageIndex)
-        onConfirm = this.onResetChess
-        break
-      case 1:
-        isOpened = true
-        content = getString('repent_tip',curLanguageIndex)
-        onConfirm = this.onRepentChess
-        break
-      case 2:
-        isOpened = true
-        content = getString('compound_tip',curLanguageIndex)
-        onConfirm = this.onCompoundChess
-        break
-    }
-
-    return (
-      <AtModal
-        isOpened={isOpened}
-        title={getString('warm_reminder',curLanguageIndex)}
-        cancelText={getString('cancel',curLanguageIndex)}
-        confirmText={getString('sure',curLanguageIndex)}
-        onConfirm={onConfirm}
-        onClose={this.onCloseCommonModal}
-        onCancel={this.onCloseCommonModal}
-        content={content}
-      />
     )
   }
 
